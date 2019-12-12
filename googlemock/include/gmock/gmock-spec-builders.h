@@ -1738,8 +1738,8 @@ class FunctionMocker<R(Args...)> final : public UntypedFunctionMockerBase {
     for (typename UntypedExpectations::const_reverse_iterator it =
              untyped_expectations_.rbegin();
          it != untyped_expectations_.rend(); ++it) {
-      TypedExpectation<F>* const exp =
-          static_cast<TypedExpectation<F>*>(it->get());
+      auto temp = it->get();
+      TypedExpectation<F>* const exp = static_cast<TypedExpectation<F>*>(temp);
       if (exp->ShouldHandleArguments(args)) {
         return exp;
       }
